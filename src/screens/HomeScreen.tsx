@@ -17,7 +17,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
 
   const fetchRandomWord = async () => {
     try {
-      const response = await fetch('http://172.20.10.4:3000/word');
+      const response = await fetch('http://192.168.1.70:3000/word');
       const data = await response.json();
       setRandomWord(data[0].word);
     } catch (error) {
@@ -40,7 +40,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         value={searchTerm}
         onChangeText={setSearchTerm}
         placeholder="Search for a word"
-        onFocus={handleSearchFocus} // Navigate to SearchScreen on focus
+        onFocus={handleSearchFocus}
       />
       <Text style={styles.heading}>Welcome to the Home Screen!</Text>
       <Text style={styles.randomWordText}>Random Word: {randomWord}</Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#fff', // Ensure background color is set for consistent appearance
+    backgroundColor: '#fff',
   },
   searchInput: {
     height: 40,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    width: '100%', // Ensure buttons take full width
+    width: '100%',
   },
 });
 

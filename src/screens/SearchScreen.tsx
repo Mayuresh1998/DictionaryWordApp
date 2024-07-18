@@ -57,7 +57,7 @@ const SearchScreen: React.FC<Props> = ({navigation, route}) => {
     if (!text.trim()) {
       setSearchResults([]);
     }
-    setErrorVisible(false); // Hide error popup when changing text
+    setErrorVisible(false);
   };
 
   const renderItem = ({item}: {item: WordResult}) => (

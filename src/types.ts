@@ -1,6 +1,3 @@
-// Define types as per your application needs
-// Example:
-
 type User = {
   username: string;
   password: string;

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, Button, StyleSheet, Platform} from 'react-native';
 import {NavigationProp} from '@react-navigation/native';
+import Sound from 'react-native-sound';
 import {getWordDetails} from '../services/api';
 import ErrorPopup from '../components/ErrorPopup';
 
@@ -41,14 +42,23 @@ const WordDetailsScreen: React.FC<Props> = ({route, navigation}) => {
 
   const handlePlaySound = () => {
     if (details && details.phonetics.length > 0 && details.phonetics[0].audio) {
-      // Implement play sound functionality here
-      console.log('Play sound:', details.phonetics[0].audio);
+      // Create a new Sound instance and play the audio
+      const sound = new Sound(details.phonetics[0].audio, undefined, error => {
+        if (error) {
+          console.log('Failed to load the sound', error);
+          return;
+        }
+        sound.play(() => {
+          // Release the sound after playing
+          sound.release();
+        });
+      });
     }
   };
 
   const handleCloseError = () => {
     setErrorVisible(false);
-    navigation.navigate('Home'); // Navigate back to the Home screen
+    navigation.navigate('Home');
   };
 
   return (

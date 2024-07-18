@@ -13,7 +13,6 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
   const [isFirstLogin, setIsFirstLogin] = useState(true);
 
   useEffect(() => {
-    // Check if username is stored in AsyncStorage
     AsyncStorage.getItem('username').then(storedUsername => {
       if (storedUsername) {
         setUsername(storedUsername);
@@ -22,9 +21,8 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
     });
   }, []);
 
-  const handleLogin = () => {
-    // Store username in AsyncStorage
-    AsyncStorage.setItem('username', username);
+  const handleLogin = async () => {
+    await AsyncStorage.setItem('username', username);
     navigation.navigate('Home');
   };
 
@@ -37,7 +35,7 @@ const LoginScreen: React.FC<Props> = ({navigation}) => {
         onChangeText={text => setUsername(text)}
         placeholder="Username"
         autoCapitalize="none"
-        //editable={!isFirstLogin} // Disable editing for subsequent logins
+        //editable={!isFirstLogin}
       />
       <TextInput
         style={styles.input}
@@ -58,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,
